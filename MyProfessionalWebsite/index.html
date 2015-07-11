@@ -174,6 +174,17 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Other Snippets <span class="caret"></span>
+						          </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#other1">JavaScript</a>
+                                    </li>
+
+                                    <li><a href="#other2">Other</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
 
                         <!-- begin tab contents section -->
@@ -601,6 +612,104 @@
                             }	
 						</code></pre>
                             </div>
+
+                            <div class="tab-pane" id="other1">
+                                <h4>Productivity website</h4>
+                                <pre>
+                                <code>
+
+                            $("#lights-button").click(function() {
+                                // change background to black and dim page content
+                                //if lights are on turn them off else turn them back on.
+                                if (lights === true) {
+                                    $(this).addClass("active");
+                                    $("#mod-this").addClass("darken");
+                                    $(".jumbotron").addClass("dim");
+                                    $(".list-group-item").addClass("dim-2");
+                                    lights = false; // set ligths flag to off
+                                } else {
+                                    $(this).removeClass("active");
+                                    $("#mod-this").removeClass("darken");
+                                    $(".jumbotron").removeClass("dim");
+                                    $(".list-group-item").removeClass("dim-2");
+                                    lights = true; //set lights flag to on
+                                }
+                            });
+
+                            //audio button controls //
+                            $("#volume-up-button").click(function() {
+                                audioPlayer.volume += 0.1;
+                                //display volume * 10,userfriendly volume indicator
+                                $("#current-volume").text("Volume: " + Math.round(audioPlayer.volume * 10));
+                            });
+
+                            $("#volume-down-button").click(function() {
+                                audioPlayer.volume -= 0.1;
+                                //display volume * 10, userfriendly volume indicator
+                                $("#current-volume").text("Volume: " + Math.floor(audioPlayer.volume * 10));
+                            });
+
+                            $("#pause-button").click(function() {
+                                audioPlayer.pause();
+                            });
+
+                            $("#play-button").click(function() {
+                                audioPlayer.play();
+                            });
+
+                            $("#mute-button").click(function() {
+                                //if audio is not muted when clicked, mute it
+                                if (audioPlayer.muted === false) {
+                                    $(this).addClass("active");
+                                    audioPlayer.muted = true;
+                                    //add indication that were muted
+                                } else { // else unmute it
+                                    $(this).removeClass("active");
+                                    audioPlayer.muted = false;
+                                }
+                            });
+
+                            $("#stop-button").click(function() {
+                                audioPlayer.pause();
+                                audioPlayer.currentTime = 0;
+                            });
+
+                            // tracklist stuff below
+                            var songlist = ["track-1.mp3",
+                                "track-2.mp3",
+                                "track-3.mp3",
+                                "track-4.mp3"
+                            ];
+
+                            function ChangeSong(songChoice) {
+                                audioPlayer.setAttribute('src', 'audio/' + songChoice);
+                                audioPlayer.load();
+                                audioPlayer.play();
+                                $("#now-playing").text("Now Playing: " + songChoice);
+                            }
+
+                            //song selection button event handlers
+                            $("#song-1-button").click(function() {
+                                ChangeSong(songlist[0]);
+                            });
+
+                            $("#song-2-button").click(function() {
+                                ChangeSong(songlist[1]);
+                            });
+
+                            $("#song-3-button").click(function() {
+                                ChangeSong(songlist[2]);
+                            });
+
+                            $("#song-4-button").click(function() {
+                                ChangeSong(songlist[3]);
+                            });
+
+                        });
+                                </code>
+                                </pre>
+                            </div>
+
                     </article>
                     </div>
                 </div>
